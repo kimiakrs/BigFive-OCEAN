@@ -1,0 +1,29 @@
+# Core numerical & data handling
+numpy
+pandas
+scipy
+
+# Deep Learning
+tensorflow>=2.10
+keras
+
+# Audio processing
+librosa
+soundfile
+
+# Computer Vision
+opencv-python
+
+# Machine Learning utilities
+scikit-learn
+
+# Visualization
+matplotlib
+seaborn
+plotly
+
+# Progress tracking & utilities
+tqdm
+
+# File handling
+h5py
