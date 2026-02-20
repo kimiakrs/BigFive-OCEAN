@@ -228,7 +228,88 @@ Outputs are continuous values in the range [0, 1].
 - Transformer-based audio representation (AST)
 - Cross-modal attention fusion
 - Real-time inference and logging capability
+---
+## Performance
 
+This section reports the quantitative performance of the three main stages of the personality analysis pipeline.
+All metrics are computed on the final test set or validation set, depending on the stage objective.
+
+#### Stage1: Video-Based Temporal Modeling (Visual Modality)
+
+| Metric                        | Value      | Interpretation                                         |
+| ----------------------------- | ---------- | ------------------------------------------------------ |
+| **Mean Squared Error (MSE)**  | **0.0192** | Low overall regression error across personality traits |
+| **Mean Absolute Error (MAE)** | **0.1103** | Average prediction deviation from ground truth         |
+
+
+#### Stage1: Training Details
+
+- **Input Shape**: `(10, 1280)`
+- **Temporal Model**: LSTM (128 units)
+- **Dense Layers**: 64 units (ReLU)
+- **Regularization**:
+  - Dropout: `0.3`
+  - Recurrent Dropout: `0.2`
+- **Batch Normalization**: Applied to input features
+- **Optimizer**: Adam  `learning_rate = 1e-4`
+- - **Epochs** : 50
+- **Loss Function**: Mean Squared Error (MSE)
+
+
+#### Stage2: Audio-Based Personality Estimation (AST)
+
+| Metric                        | Value      | Interpretation                            |
+| ----------------------------- | ---------- | ----------------------------------------- |
+| **Mean Squared Error (MSE)**  | **0.0190** | Comparable performance to visual modality |
+| **Mean Absolute Error (MAE)** | **0.1109** | Stable regression accuracy across traits  |
+
+
+#### Stage2: Training Details
+
+- **Input Shape**: `(128, 1500, 1)`
+- **Patch Embedding**: Conv2D `(16x16)` with stride `(16x16)`
+- **Attention Mechanism:**: Multi-Head Attention (4 heads, key_dim = 64)
+- **Pooling**: GlobalAveragePooling1D
+- **Dense Layers**: 128 units (ReLU)
+- **Regularization**:
+  - Dropout: `0.3`
+  - SpecAugment (frequency + time masking)
+- **Batch Normalization**: Applied to input features
+- **Optimizer**: Adam  `learning_rate = 1e-4`
+- - **Epochs** : 50
+- **Loss Function**: Mean Squared Error (MSE)
+
+#### Stage3: Multimodal Integration Strategy Selection (Audio + Video)
+
+| Model               | Validation MAE |
+| ------------------- | -------------- |
+| **Transformer V1**  | **0.1055**     |
+| Baseline            | 0.1066         |
+| Full Transformer    | 0.1069         |
+| Refined Transformer | 0.1076         |
+
+#### Stage3: Training Details per Strategy
+
+##### Baseline
+* **Epoch** : 12
+* **Dropout**: 0.3
+* **Optimizer**: Adam  `learning_rate = 1e-4`
+
+##### Transformer V1 (**Selected Model**)
+* **Epoch** : 15
+* **Dropout**: 0.4
+* **Optimizer**: Adam  `learning_rate = 1e-4`
+
+##### Refined Transformer
+* **Epoch** : 25
+* **Optimizer**: Adam  `learning_rate = 5e-5`
+* **Dropout**: 0.5
+* **L2Regularization**:  kernel_regularizer `l2(0.01)`
+
+##### Full Transfromer (Self Attention + CrossModal Attention)
+* **Epoch** : 20
+* **Dropout**: 0.3
+* **Optimizer**: Adam  `learning_rate = 5e-5`
 ---
 
 ## 1. PROJECT STRUCTURE & DIRECTORY MAP
@@ -323,7 +404,7 @@ pip install tensorflow pandas numpy opencv-python librosa matplotlib seaborn sci
 
 ---
 
-## 4. DATA PIPELINE PROCESS
+## Project Structure
 
 The project operates in four distinct stages:
 
