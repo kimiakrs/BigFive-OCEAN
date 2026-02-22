@@ -37,7 +37,7 @@ the Big Five (OCEAN) model, integrating audio and visual cues extracted from sho
 - [Performance](#performance)
 - [Requirements](#requirements)
 - [Project Structure](#project-structure)
-- [EXecution Instructions](#execution-instructions)
+- [Execution Instructions](#execution-instructions)
 - [Future Work](#future-work)
 - [Contributors](#contributors)
 - [Disclaimer](#disclaimer)
