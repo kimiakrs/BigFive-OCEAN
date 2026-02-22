@@ -26,15 +26,12 @@ the Big Five (OCEAN) model, integrating audio and visual cues extracted from sho
 ## Table of Contents
 
 - [Overview](#overview)
+- [Dataset](#dataset)
 - [Architecture](#architecture)
 - [Performance](#performance)
-- [Installation](#installation)
-- [Dataset](#dataset)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
-- [Technical Details](#technical-details)
-- [Results](#results)
 - [Requirements](#requirements)
+- [Project Structure](#project-structure)
+- [EXECUTION INSTRUCTIONS](#execution-instructions)
 - [Future Work](#future-work)
 - [Contributors](#contributors)
 - [Disclaimer](#disclaimer)
@@ -312,7 +309,41 @@ All metrics are computed on the final test set or validation set, depending on t
 * **Optimizer**: Adam  `learning_rate = 5e-5`
 ---
 
-## 1. PROJECT STRUCTURE & DIRECTORY MAP
+## Requirements
+
+
+### LIBRARY ROLES & PROJECT IMPACT
+
+- **os & glob**  
+  Automated the management of thousands of files across the shared folder system.
+
+- **cv2 (OpenCV)**  
+  Handled frame extraction such as `train_frames_1p5s`, allowing for visual behavior analysis.
+
+- **librosa**  
+  Transformed raw audio into Mel-spectrograms to identify vocal personality cues.
+
+- **tensorflow & keras**  
+  Used to build the Transformer-Attention architecture and perform real-time inference.
+
+- **tqdm & gc**  
+  Added progress tracking and managed memory to prevent crashes during large-scale feature extraction.
+
+- **scipy & sklearn**  
+  Used to calculate the Pearson Correlation and MAE to validate model accuracy.
+
+
+### ENVIRONMENT SETUP
+All required libraries were saved in requirements.txt
+Copy and paste the following command into your terminal to install all required libraries:
+
+```bash
+pip install tensorflow pandas numpy opencv-python librosa matplotlib seaborn scikit-learn plotly tqdm scipy
+```
+
+---
+
+## Project Structure
 
 To ensure the code executes correctly, please maintain the following hierarchy in the root directory:
 
@@ -370,42 +401,6 @@ test-annotation-e.zip
 (Folder for real-time video testing / unseen data)
 ```
 
----
-
-## 2. ENVIRONMENT SETUP
-
-Copy and paste the following command into your terminal to install all required libraries:
-
-```bash
-pip install tensorflow pandas numpy opencv-python librosa matplotlib seaborn scikit-learn plotly tqdm scipy
-```
-
----
-
-## 3. LIBRARY ROLES & PROJECT IMPACT
-
-- **os & glob**  
-  Automated the management of thousands of files across the shared folder system.
-
-- **cv2 (OpenCV)**  
-  Handled frame extraction for `train_frames_1p5s`, allowing for visual behavior analysis.
-
-- **librosa**  
-  Transformed raw audio into Mel-spectrograms to identify vocal personality cues.
-
-- **tensorflow & keras**  
-  Used to build the Transformer-Attention architecture and perform real-time inference.
-
-- **tqdm & gc**  
-  Added progress tracking and managed memory to prevent crashes during large-scale feature extraction.
-
-- **scipy & sklearn**  
-  Used to calculate the Pearson Correlation and MAE to validate model accuracy.
-
----
-
-## Project Structure
-
 The project operates in four distinct stages:
 
 ### 4.1 Extraction
@@ -444,7 +439,7 @@ Visual features are saved as `.npy` files in the `videos_features_extraction` di
 
 ---
 
-## 5. EXECUTION INSTRUCTIONS
+## EXECUTION INSTRUCTIONS
 
 1. **Open the Notebook**  
    Launch `PersonalityBig5.ipynb`.
