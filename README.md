@@ -2,15 +2,18 @@
 This project implements a multimodal deep learning pipeline for real-time personality trait prediction based on 
 the Big Five (OCEAN) model, integrating audio and visual cues extracted from short video clips (15 seconds) using Transformer-based attention mechanisms.
 
-[![Python](https://img.shields.io/badge/Python-3.x-blue.svg)](https://www.python.org/)
-[![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-orange.svg)](https://pytorch.org/)
-[![Multimodal](https://img.shields.io/badge/Multimodal-Logs%20%7C%20Metrics%20%7C%20Traces-darkblue.svg)](#)
-[![Transformer](https://img.shields.io/badge/Architecture-Transformer-red.svg)](https://pytorch.org/docs/stable/generated/torch.nn.Transformer.html)
-[![Fusion](https://img.shields.io/badge/Cross--Modal-Fusion-purple.svg)](#)
-[![Temporal Modeling](https://img.shields.io/badge/Temporal-Sequence%20Learning-green.svg)](#)
-[![Interpretability](https://img.shields.io/badge/Explainability-Attention%20Analysis-yellow.svg)](#)
-[![Real-time](https://img.shields.io/badge/AIOps-Anomaly%20%26%20RCA-blue.svg)](#)
-[![Dataset](https://img.shields.io/badge/Dataset-GoogleDrive-pink.svg)](https://drive.google.com/drive/folders/1T0y_y1y9TMKTbPkE_MqurcZovbhKN3uA?dmr=1&ec=wgc-drive-%5Bmodule%5D-goto)
+[![Python](https://img.shields.io/badge/Python-3.10-blue.svg)](https://www.python.org/)
+[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-orange.svg)](https://www.tensorflow.org/)
+[![Keras](https://img.shields.io/badge/Keras-API-red.svg)](https://keras.io/)
+[![Multimodal](https://img.shields.io/badge/Modality-Audio%20%2B%20Video-purple.svg)](#)
+[![Transformer](https://img.shields.io/badge/Architecture-Transformer-red.svg)](#)
+[![LSTM](https://img.shields.io/badge/Temporal-LSTM-green.svg)](#)
+[![Cross-Modal Fusion](https://img.shields.io/badge/Fusion-Cross--Attention-blue.svg)](#)
+[![Dataset](https://img.shields.io/badge/Dataset-ChaLearn%20FI%20V2-yellow.svg)](https://chalearnlap.cvc.uab.es/dataset/24/)
+[![Task](https://img.shields.io/badge/Task-Personality%20Regression-brightgreen.svg)](#)
+[![CVPR](https://img.shields.io/badge/Benchmark-CVPR%202017-lightgrey.svg)](#)
+[![Real-Time](https://img.shields.io/badge/Inference-Real--Time-blue.svg)](#)
+[![Logging](https://img.shields.io/badge/Output-CSV%20Logging-orange.svg)](#)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ## Quick Start (Kaggle)
@@ -31,7 +34,7 @@ the Big Five (OCEAN) model, integrating audio and visual cues extracted from sho
 - [Performance](#performance)
 - [Requirements](#requirements)
 - [Project Structure](#project-structure)
-- [EXECUTION INSTRUCTIONS](#execution-instructions)
+- [EXecution Instructions](#execution-instructions)
 - [Future Work](#future-work)
 - [Contributors](#contributors)
 - [Disclaimer](#disclaimer)
@@ -73,7 +76,11 @@ behavioral analytics, and AI-driven profiling applications.
 
 If you want to work with the original raw videos and annotations — without pre-generated feature files or processed frame splits — you can download the official ChaLearn dataset here:
 
+**Because of limited resources first part of the dataset was downloaded for each training, validation, and testing**
+
 [ChaLearn First Impressions V2 (CVPR'17)](https://chalearnlap.cvc.uab.cat/dataset/24/description/#)
+
+
 
 ### Preprocessed ChaLearn Dataset
 
@@ -335,6 +342,7 @@ All metrics are computed on the final test set or validation set, depending on t
 
 ### ENVIRONMENT SETUP
 All required libraries were saved in requirements.txt
+
 Copy and paste the following command into your terminal to install all required libraries:
 
 ```bash
@@ -459,3 +467,60 @@ Visual features are saved as `.npy` files in the `videos_features_extraction` di
    ```
 
    The system will automatically process the clip and update the `personality_logs.csv` file.
+
+---
+
+## Future Work
+
+- [x] EfficientNetB0 + LSTM visual modeling
+- [x] Audio Spectrogram Transformer (AST) implementation
+- [x] Transformer-based cross-modal fusion
+- [x] Experiment with Late Fusion vs cross-modal strategies
+- [x] Real-time inference and CSV logging
+- [ ] Replace EfficientNetB0 with Vision Transformer (ViT) for spatial modeling
+- [ ] Use full ChaLearn First Impressions V2
+- [ ] Improve robustness against background noise
+- [ ] Domain adaptation for real-world webcam videos
+- [ ] Deployment using TensorRT optimization
+- [ ] Edge deployment (e.g., NVIDIA Jetson)
+- [ ] Hyperparameter search (Optuna / Bayesian Optimization)
+
+---
+
+
+## Contributors
+
+- **Kimiakarbasi** - *Co-author* - [Github Profile](https://github.com/kimiakrs)
+- **Andres Cabilon** - *Co-author* - [Github Profile](https://www.kaggle.com/andressabillon)
+- **Civan Arda Ozel** - *Co-author* - [Github Profile](https://github.com/cardaozel)
+  
+---
+
+## Disclaimer
+
+This project is for research and educational purposes. The models are trained on specific datasets and may not generalize to all scenarios. For safety-critical applications, thorough testing and validation are required.
+
+**If you find this project useful, please consider giving it a star!**
+
+---
+
+## Citation
+
+If you use this project or dataset in your research, please cite:
+
+```bibtex
+@inproceedings{perez2017first,
+  title={First Impressions: A Dataset for Apparent Personality Analysis},
+  author={P{\'e}rez-Rosas, Ver{\'o}nica and Mihalcea, Rada and Narvaez, Alexis and Burzo, Mihai},
+  booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year={2017}
+}
+
+```
+----
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+
